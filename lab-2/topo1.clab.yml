@@ -1,0 +1,61 @@
+name: topo1
+
+topology:
+  nodes:
+    ISP:
+      kind: linux
+      image: nicolaka/netshoot
+      exec:
+        - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+        - bash -c '
+          for i in {1..5};
+          do
+            ip addr add ${i}.${i}.${i}.2/30 dev eth${i};
+          done'
+    router:
+      kind: mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:7.20.7
+      startup-config: cfg/router.rsc
+    chr:
+      kind: mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:7.20.7
+      startup-config: cfg/chr.rsc
+    client:
+      kind: linux
+      image: nicolaka/netshoot
+      network-mode: none
+      exec:
+        - ip addr add 1.1.1.1/30 dev eth1
+        - ip route add default via 1.1.1.2 dev eth1
+    ingress:
+      kind: linux
+      image: nicolaka/netshoot
+      network-mode: none
+      exec:
+        - ip addr add 3.3.3.1/30 dev eth2
+        - ip route add default via 3.3.3.2 dev eth2
+        - bash -c "udhcpc -i eth1 -x hostname:$(hostname)"
+    worker:
+      kind: linux
+      image: nicolaka/netshoot
+      network-mode: none
+      exec:
+        - bash -c "udhcpc -i eth1 -x hostname:$(hostname)"
+    minio:
+      kind: linux
+      image: nicolaka/netshoot
+      network-mode: none
+      exec:
+        - ip addr add 4.4.4.1/30 dev eth1
+        - ip route add default via 4.4.4.2 dev eth1
+        - iptables -A INPUT -s 2.2.2.1 -j DROP
+        - iptables -A INPUT -s 3.3.3.1 -j DROP
+  links:
+    - endpoints: [ "client:eth1", "ISP:eth1" ]
+    - endpoints: [ "router:eth1", "ISP:eth2" ]
+    - endpoints: [ "worker:eth1", "router:eth3" ]
+    - endpoints: [ "ingress:eth1", "router:eth2" ]
+    - endpoints: [ "ingress:eth2", "ISP:eth3" ]
+    - endpoints: [ "minio:eth1", "ISP:eth4" ]
+    - endpoints: [ "chr:eth1", "ISP:eth5" ]
+    - endpoints: [ "router:eth4", "chr:eth2" ]

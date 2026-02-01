@@ -1,0 +1,136 @@
+{
+  "freeTextAnnotations": [],
+  "freeShapeAnnotations": [],
+  "groupStyleAnnotations": [],
+  "networkNodeAnnotations": [],
+  "nodeAnnotations": [
+    {
+      "id": "r5",
+      "position": {
+        "x": -77,
+        "y": -35
+      }
+    },
+    {
+      "id": "client",
+      "position": {
+        "x": 147,
+        "y": 35
+      }
+    },
+    {
+      "id": "ISP",
+      "position": {
+        "x": 63,
+        "y": 35
+      }
+    },
+    {
+      "id": "router",
+      "position": {
+        "x": -35,
+        "y": 35
+      }
+    },
+    {
+      "id": "priv-srv",
+      "position": {
+        "x": -105,
+        "y": 49
+      }
+    },
+    {
+      "id": "worker",
+      "position": {
+        "x": -63,
+        "y": 105
+      }
+    },
+    {
+      "id": "minio",
+      "position": {
+        "x": 77,
+        "y": -63
+      }
+    },
+    {
+      "id": "chr",
+      "position": {
+        "x": 7,
+        "y": -63
+      },
+      "geoCoordinates": {
+        "lat": 48.73482688840225,
+        "lng": 8.907895390625677
+      }
+    },
+    {
+      "id": "r1",
+      "position": {
+        "x": -35,
+        "y": -77
+      }
+    },
+    {
+      "id": "r4",
+      "position": {
+        "x": -63,
+        "y": 21
+      }
+    },
+    {
+      "id": "r2",
+      "position": {
+        "x": 7,
+        "y": -35
+      }
+    },
+    {
+      "id": "r3",
+      "position": {
+        "x": -7,
+        "y": 21
+      }
+    },
+    {
+      "id": "c5",
+      "position": {
+        "x": -133,
+        "y": -35
+      }
+    },
+    {
+      "id": "c4",
+      "position": {
+        "x": -91,
+        "y": 63
+      }
+    },
+    {
+      "id": "c3",
+      "position": {
+        "x": 35,
+        "y": 63
+      }
+    },
+    {
+      "id": "c2",
+      "position": {
+        "x": 63,
+        "y": -35
+      }
+    },
+    {
+      "id": "c1",
+      "position": {
+        "x": -35,
+        "y": -133
+      }
+    }
+  ],
+  "edgeAnnotations": [],
+  "aliasEndpointAnnotations": [],
+  "viewerSettings": {
+    "endpointLabelOffset": 11
+  }
+}

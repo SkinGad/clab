@@ -1,0 +1,56 @@
+name: topo1
+
+topology:
+  groups:
+    mikrotik:
+      kind: mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:7.20.7
+    client:
+      kind: linux
+      image: nicolaka/netshoot
+      network-mode: none
+      exec:
+        - bash -c "ip addr add 1.10.$(hostname | sed 's/[^0-9]*//g').1/30 dev eth1"
+        - bash -c "ip route add default via 1.10.$(hostname | sed 's/[^0-9]*//g').2 dev eth1"
+
+  nodes:
+    r1:
+      group: mikrotik
+      startup-config: cfg/r1.rsc
+    r2:
+      group: mikrotik
+      startup-config: cfg/r2.rsc
+    r3:
+      group: mikrotik
+      startup-config: cfg/r3.rsc
+    r4:
+      group: mikrotik
+      startup-config: cfg/r4.rsc
+    r5:
+      group: mikrotik
+      startup-config: cfg/r5.rsc
+    c1:
+      group: client
+    c2:
+      group: client
+    c3:
+      group: client
+    c4:
+      group: client
+    c5:
+      group: client
+
+  links:
+    - endpoints: [ "r1:eth2", "r2:eth1" ]
+    - endpoints: [ "r2:eth2", "r3:eth1" ]
+    - endpoints: [ "r3:eth2", "r4:eth1" ]
+    - endpoints: [ "r4:eth2", "r5:eth1" ]
+    - endpoints: [ "r5:eth2", "r1:eth1" ]
+    - endpoints: [ "r5:eth3", "r2:eth3" ]
+    - endpoints: [ "r4:eth3", "r1:eth3" ]
+    
+    - endpoints: [ "c1:eth1", "r1:eth4" ]
+    - endpoints: [ "c2:eth1", "r2:eth4" ]
+    - endpoints: [ "c3:eth1", "r3:eth4" ]
+    - endpoints: [ "c4:eth1", "r4:eth4" ]
+    - endpoints: [ "c5:eth1", "r5:eth4" ]

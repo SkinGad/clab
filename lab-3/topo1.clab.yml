@@ -1,0 +1,9 @@
+name: topo1
+
+topology:
+  nodes:
+    router:
+      kind: mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:7.20.7
+  links:
+    - endpoints: [ "client:eth1", "router:eth1" ]

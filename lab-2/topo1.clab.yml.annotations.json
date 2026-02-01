@@ -1,0 +1,129 @@
+{
+  "freeTextAnnotations": [],
+  "freeShapeAnnotations": [],
+  "groupStyleAnnotations": [
+    {
+      "id": "group-1",
+      "name": "Location",
+      "level": "1",
+      "position": {
+        "x": -37.15384589016465,
+        "y": 71.8007676030329
+      },
+      "width": 107.64342623194298,
+      "height": 98.23514275966428,
+      "backgroundColor": "#8fd4ff",
+      "backgroundOpacity": 20,
+      "borderColor": "#dddddd",
+      "borderWidth": 0.5,
+      "borderStyle": "solid",
+      "borderRadius": 0,
+      "labelColor": "#ebecf0",
+      "labelPosition": "top-center",
+      "zIndex": 1,
+      "geoCoordinates": {
+        "lat": 48.72387086013492,
+        "lng": 8.537195341438235
+      }
+    },
+    {
+      "id": "group-2",
+      "name": "Germany",
+      "level": "1",
+      "position": {
+        "x": 39.11019574329139,
+        "y": -52.53139789538514
+      },
+      "width": 148.82342850644287,
+      "height": 58.819997725500116,
+      "backgroundColor": "#ff8585",
+      "backgroundOpacity": 20,
+      "borderColor": "#dddddd",
+      "borderWidth": 0.5,
+      "borderStyle": "solid",
+      "borderRadius": 0,
+      "labelColor": "#ebecf0",
+      "labelPosition": "top-center",
+      "zIndex": 2
+    }
+  ],
+  "networkNodeAnnotations": [],
+  "nodeAnnotations": [
+    {
+      "id": "ingress",
+      "position": {
+        "x": -7,
+        "y": 105
+      },
+      "groupId": "group-1",
+      "group": "Location",
+      "level": "1"
+    },
+    {
+      "id": "client",
+      "position": {
+        "x": 147,
+        "y": 35
+      }
+    },
+    {
+      "id": "ISP",
+      "position": {
+        "x": 63,
+        "y": 35
+      }
+    },
+    {
+      "id": "router",
+      "position": {
+        "x": -35,
+        "y": 35
+      }
+    },
+    {
+      "id": "priv-srv",
+      "position": {
+        "x": -105,
+        "y": 49
+      }
+    },
+    {
+      "id": "worker",
+      "position": {
+        "x": -63,
+        "y": 105
+      }
+    },
+    {
+      "id": "minio",
+      "position": {
+        "x": 77,
+        "y": -63
+      }
+    },
+    {
+      "id": "chr",
+      "position": {
+        "x": 7,
+        "y": -63
+      },
+      "geoCoordinates": {
+        "lat": 48.73482688840225,
+        "lng": 8.907895390625677
+      }
+    }
+  ],
+  "edgeAnnotations": [
+    {
+      "id": "Clab-Link7",
+      "source": "router",
+      "target": "chr",
+      "sourceEndpoint": "eth4",
+      "targetEndpoint": "eth2",
+      "endpointLabelOffsetEnabled": true,
+      "endpointLabelOffset": 20
+    }
+  ],
+  "aliasEndpointAnnotations": [],
+  "viewerSettings": {}
+}
