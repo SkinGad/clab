@@ -12,4 +12,3 @@ interface-template add area=ospf-area-1
 /routing filter rule
 add chain=ostf disabled=no rule="if (dst == 1.10.0.0/16 && dst-len in 16-32 && \
     not protocol connected,ospf) { accept; }"
-
