@@ -1,4 +1,4 @@
-DEPS_MIKROTIK_VERSION=7.20.7 7.21.2
+DEPS_MIKROTIK_VERSION=7.20.7 7.21.2 7.20.8
 
 VRNETLAB_DIR=vrnetlab
 VRNETLAB_URL=https://github.com/srl-labs/vrnetlab.git
