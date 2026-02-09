@@ -6,10 +6,10 @@ add address=1.3.1.2/30 interface=ether4
 add address=1.10.5.2/30 interface=ether5
 
 /routing ospf
-instance add name=ospf-instance-1 out-filter-chain=ostf router-id=0.0.0.5
+instance add name=ospf-instance-1 out-filter-chain=ospf router-id=0.0.0.5
 area add instance=ospf-instance-1 name=ospf-area-1
 interface-template add area=ospf-area-1
 
 /routing filter rule
-add chain=ostf disabled=no rule="if (dst == 1.10.0.0/16 && dst-len in 16-32 && \
+add chain=ospf disabled=no rule="if (dst == 1.10.0.0/16 && dst-len in 16-32 && \
     not protocol connected,ospf) { accept; }"
