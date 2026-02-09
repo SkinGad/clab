@@ -1,0 +1,172 @@
+{
+  "freeTextAnnotations": [],
+  "freeShapeAnnotations": [],
+  "groupStyleAnnotations": [],
+  "networkNodeAnnotations": [],
+  "nodeAnnotations": [
+    {
+      "id": "ISP",
+      "position": {
+        "x": 231,
+        "y": 161
+      }
+    },
+    {
+      "id": "br0",
+      "position": {
+        "x": 329,
+        "y": 175
+      }
+    },
+    {
+      "id": "server-ban",
+      "position": {
+        "x": 133,
+        "y": 133
+      }
+    },
+    {
+      "id": "chr",
+      "position": {
+        "x": 175,
+        "y": 77
+      }
+    },
+    {
+      "id": "server-cloud",
+      "position": {
+        "x": 147,
+        "y": 203
+      }
+    },
+    {
+      "id": "office-2",
+      "position": {
+        "x": 315,
+        "y": 91
+      }
+    },
+    {
+      "id": "office-1",
+      "position": {
+        "x": 245,
+        "y": 77
+      }
+    },
+    {
+      "id": "main-1",
+      "position": {
+        "x": 301,
+        "y": 231
+      }
+    },
+    {
+      "id": "main-2",
+      "position": {
+        "x": 385,
+        "y": 217
+      }
+    },
+    {
+      "id": "sw-1",
+      "position": {
+        "x": 301,
+        "y": 413
+      }
+    },
+    {
+      "id": "core-1",
+      "position": {
+        "x": 329,
+        "y": 301
+      }
+    },
+    {
+      "id": "core-3",
+      "position": {
+        "x": 273,
+        "y": 343
+      }
+    },
+    {
+      "id": "core-2",
+      "position": {
+        "x": 483,
+        "y": 301
+      }
+    },
+    {
+      "id": "c10",
+      "position": {
+        "x": 217,
+        "y": 413
+      }
+    },
+    {
+      "id": "sw-2",
+      "position": {
+        "x": 315,
+        "y": 469
+      }
+    },
+    {
+      "id": "c20",
+      "position": {
+        "x": 217,
+        "y": 455
+      }
+    },
+    {
+      "id": "c21",
+      "position": {
+        "x": 217,
+        "y": 511
+      }
+    },
+    {
+      "id": "sw-3",
+      "position": {
+        "x": 357,
+        "y": 525
+      }
+    },
+    {
+      "id": "c30",
+      "position": {
+        "x": 301,
+        "y": 567
+      }
+    },
+    {
+      "id": "c31",
+      "position": {
+        "x": 357,
+        "y": 595
+      }
+    },
+    {
+      "id": "s2",
+      "position": {
+        "x": 539,
+        "y": 343
+      }
+    },
+    {
+      "id": "s1",
+      "position": {
+        "x": 455,
+        "y": 357
+      }
+    },
+    {
+      "id": "core-4",
+      "position": {
+        "x": 497,
+        "y": 427
+      }
+    }
+  ],
+  "edgeAnnotations": [],
+  "aliasEndpointAnnotations": [],
+  "viewerSettings": {}
+}

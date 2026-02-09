@@ -1,0 +1,156 @@
+name: topo1
+
+topology:
+  groups:
+    base-linux:
+      kind: linux
+      image: nicolaka/netshoot
+      network-mode: none
+    mikrotik:
+      kind: mikrotik_ros
+      image: vrnetlab/mikrotik_routeros:7.20.8
+    client-linux:
+      kind: linux
+      image: nicolaka/netshoot
+      network-mode: none
+      exec:
+        - bash -c "ip addr add 10.10.$(hostname | sed 's/[^0-9]*//g').1/30 dev eth1"
+        - bash -c "ip route add default via 10.10.$(hostname | sed 's/[^0-9]*//g').2 dev eth1"
+  nodes:
+    ISP:
+      kind: linux
+      image: nicolaka/netshoot
+      exec:
+        - iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+        - bash -c '
+          for i in {1..6};
+          do
+            ip addr add ${i}.${i}.${i}.2/30 dev eth${i};
+          done'
+    br0:
+      kind: bridge
+    server-cloud:
+      group: base-linux
+      exec:
+        - ip addr add 2.2.2.1/30 dev eth1
+        - ip route add default via 2.2.2.2 dev eth1
+    server-ban:
+      group: base-linux
+      exec:
+        - ip addr add 3.3.3.1/30 dev eth1
+        - ip route add default via 3.3.3.2 dev eth1
+        - iptables -A INPUT -s 1.1.1.1 -j DROP
+        - iptables -A INPUT -s 2.2.2.1 -j DROP
+        - iptables -A INPUT -s 5.5.5.1 -j DROP
+        - iptables -A INPUT -s 6.6.6.1 -j DROP
+
+    office-1:
+      group: mikrotik
+      startup-config: cfg/office-1.rsc
+    office-2:
+      group: mikrotik
+      startup-config: cfg/office-2.rsc
+    chr:
+      group: mikrotik
+      startup-config: cfg/chr.rsc
+
+
+    main-1:
+      group: mikrotik
+      startup-config: cfg/main-1.rsc
+    main-2:
+      group: mikrotik
+      startup-config: cfg/main-2.rsc
+
+    core-1:
+      group: mikrotik
+      startup-config: cfg/core-1.rsc
+    core-2:
+      group: mikrotik
+      startup-config: cfg/core-2.rsc
+    core-3:
+      group: mikrotik
+      startup-config: cfg/core-3.rsc
+    core-4:
+      group: mikrotik
+      startup-config: cfg/core-4.rsc
+
+    sw-1:
+      group: mikrotik
+      startup-config: cfg/sw-1.rsc
+    sw-2:
+      group: mikrotik
+      startup-config: cfg/sw-2.rsc
+    sw-3:
+      group: mikrotik
+      startup-config: cfg/sw-3.rsc
+
+    s1:
+      group: base-linux
+      exec:
+        - ip link add name br0 type bridge
+        - ip link set eth1 master br0
+        - ip link set eth2 master br0
+        - ip link set br0 up
+        - ip addr add 10.5.0.1/24 dev br0
+        - ip route add default via 10.5.0.254 dev br0
+    s2:
+      group: base-linux
+      exec:
+        - ip link add name br0 type bridge
+        - ip link set eth1 master br0
+        - ip link set eth2 master br0
+        - ip link set br0 up
+        - ip addr add 10.5.0.2/24 dev br0
+        - ip route add default via 10.5.0.254 dev br0
+
+    c10:
+      group: client-linux
+    c20:
+      group: client-linux
+    c21:
+      group: client-linux
+    c30:
+      group: client-linux
+    c31:
+      group: client-linux
+
+  links:
+    - endpoints: [ "br0:eth1", "ISP:eth1" ]
+    - endpoints: [ "server-cloud:eth1", "ISP:eth2" ]
+    - endpoints: [ "server-ban:eth1", "ISP:eth3" ]
+    - endpoints: [ "chr:eth1", "ISP:eth4" ]
+    - endpoints: [ "office-1:eth1", "ISP:eth5" ]
+    - endpoints: [ "office-2:eth1", "ISP:eth6" ]
+
+    - endpoints: [ "br0:eth2", "main-1:eth1" ]
+    - endpoints: [ "br0:eth3", "main-2:eth1" ]
+
+    - endpoints: [ "core-1:eth1", "main-1:eth2" ]
+    - endpoints: [ "core-1:eth2", "main-2:eth2" ]
+    - endpoints: [ "core-3:eth1", "main-1:eth3" ]
+    - endpoints: [ "core-3:eth2", "main-2:eth3" ]
+
+    - endpoints: [ "core-1:eth3", "core-2:eth1" ]
+    - endpoints: [ "core-1:eth4", "core-4:eth1" ]
+    - endpoints: [ "core-3:eth3", "core-2:eth2" ]
+    - endpoints: [ "core-3:eth4", "core-4:eth2" ]
+
+    - endpoints: [ "core-1:eth5", "sw-1:eth1" ]
+    - endpoints: [ "core-1:eth6", "sw-2:eth1" ]
+    - endpoints: [ "core-1:eth7", "sw-3:eth1" ]
+    - endpoints: [ "core-3:eth5", "sw-1:eth2" ]
+    - endpoints: [ "core-3:eth6", "sw-2:eth2" ]
+    - endpoints: [ "core-3:eth7", "sw-3:eth2" ]
+
+    - endpoints: [ "c10:eth1", "sw-1:eth3" ]
+    - endpoints: [ "c20:eth1", "sw-2:eth3" ]
+    - endpoints: [ "c21:eth1", "sw-2:eth4" ]
+    - endpoints: [ "c30:eth1", "sw-3:eth3" ]
+    - endpoints: [ "c31:eth1", "sw-3:eth4" ]
+
+
+    - endpoints: [ "s1:eth1", "core-2:eth3" ]
+    - endpoints: [ "s1:eth2", "core-4:eth3" ]
+    - endpoints: [ "s2:eth1", "core-2:eth4" ]
+    - endpoints: [ "s2:eth2", "core-4:eth4" ]
